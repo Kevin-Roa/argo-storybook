@@ -1,12 +1,18 @@
-import * as React from 'react';
-import { Box, MenuItem, FormControl, RadioGroup, FormControlLabel } from '@mui/material';
-import MUIMenu from '@mui/material/Menu';
-import RadioButton from '../radiobutton/RadioButton';
-import Checkbox from '../checkbox/Checkbox';
-import Toggle from '../toggle/Toggle';
+import * as React from "react";
+import {
+  Box,
+  MenuItem,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+} from "@mui/material";
+import MUIMenu from "@mui/material/Menu";
+import RadioButton from "../radiobutton/RadioButton";
+import Checkbox from "../checkbox/Checkbox";
+import Toggle from "../toggle/Toggle";
 
 export interface MenuProps {
-  variant?: 'default' | 'checkmenu' | 'radiomenu' | 'togglemenu';
+  variant?: "default" | "checkmenu" | "radiomenu" | "togglemenu";
   options: string[];
   open?: boolean;
   close?: (event: {}, reason: "backdropClick" | "escapeKeyDown") => any;
@@ -14,14 +20,21 @@ export interface MenuProps {
   anchorEl?: HTMLElement | null;
 }
 
-function MenuHandler(variant: string, options: string[], open: boolean, close: (event: {}, reason: "backdropClick" | "escapeKeyDown") => {}, componentColor: string, anchorEl: HTMLElement | null) {
+function MenuHandler(
+  variant: string,
+  options: string[],
+  open: boolean,
+  close: (event: {}, reason: "backdropClick" | "escapeKeyDown") => {},
+  componentColor: string,
+  anchorEl: HTMLElement | null
+) {
   const handleClick = () => {
-    if (variant === 'default') {
-      close({}, 'backdropClick');
+    if (variant === "default") {
+      close({}, "backdropClick");
     }
-  }
+  };
 
-  if (variant === 'radiomenu') {
+  if (variant === "radiomenu") {
     return (
       <Box>
         <MUIMenu
@@ -36,7 +49,9 @@ function MenuHandler(variant: string, options: string[], open: boolean, close: (
                 <MenuItem key={option}>
                   <FormControlLabel
                     value={option}
-                    control={<RadioButton value={option} color={componentColor} />}
+                    control={
+                      <RadioButton value={option} color={componentColor} />
+                    }
                     label={option}
                   />
                 </MenuItem>
@@ -49,16 +64,19 @@ function MenuHandler(variant: string, options: string[], open: boolean, close: (
   } else {
     return (
       <Box>
-        <MUIMenu
-          open={open}
-          onClose={close}
-          anchorEl={anchorEl}
-        >
+        <MUIMenu open={open} onClose={close} anchorEl={anchorEl}>
           {options.map((option) => (
             <MenuItem key={option} onClick={handleClick}>
-              {(variant === 'default') ? <div>{option}</div> : null}
-              {(variant === 'checkmenu') ? <Checkbox label={option} color={componentColor} /> : null}
-              {(variant === 'togglemenu') ? <div><Toggle color={componentColor} />{option}</div> : null}
+              {variant === "default" ? <div>{option}</div> : null}
+              {variant === "checkmenu" ? (
+                <Checkbox label={option} color={componentColor} />
+              ) : null}
+              {variant === "togglemenu" ? (
+                <div>
+                  <Toggle />
+                  {option}
+                </div>
+              ) : null}
             </MenuItem>
           ))}
         </MUIMenu>
@@ -68,11 +86,11 @@ function MenuHandler(variant: string, options: string[], open: boolean, close: (
 }
 
 const Menu = ({
-  variant = 'default',
+  variant = "default",
   options = [],
   open = true,
   close = (event: {}, reason: "backdropClick" | "escapeKeyDown") => {},
-  componentColor = 'blue',
+  componentColor = "blue",
   anchorEl = null,
   ...props
 }: MenuProps) => {

@@ -71,3 +71,20 @@ HelloWorld.args = {
 		document.body.append(hello);
 	}
 }
+
+
+// gpt
+
+export const PrimaryARGO = Template.bind({});
+PrimaryARGO.args = {
+  variant: 'primary',
+  color: '#01579B', // ARGO Primary color
+  label: 'Primary Button',
+};
+
+export const SecondaryARGO = Template.bind({});
+SecondaryARGO.args = {
+  variant: 'secondary',
+  color: '#2962FF', // ARGO Secondary color
+  label: 'Secondary Button',
+};
